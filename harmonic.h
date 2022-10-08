@@ -5,21 +5,17 @@
 #include <ostream>
 #include <regex>
 #include <vector>
+#include "timeSeries.h"
 
-class Model {
+class Harmonic {
  public:
-  int t;
-  int t_2;
   double Alpha;
   double Betta;
   double R;
   double W;
   double O;
-  std::vector<double> timeSeries;
-  std::vector<double> alphaCoefs;
-  std::vector<double> bettaCoefs;
-  void calc(std::string str);
-  void string_to_vector(std::string str);
+  TimeSeries *timeSeries;
+  Harmonic(TimeSeries *series):timeSeries(series) {}
 
   double calcAlpha(int j);
   double calcBetta(int j);
