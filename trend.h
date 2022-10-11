@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <ostream>
@@ -25,6 +26,21 @@ class PolynomialTrend : public Trend {
     this->timeSeries = series;
   }
   ~PolynomialTrend() = default;
+
+  void parameterEstimation();
+  S21Matrix getX();
+  S21Matrix getY();
+};
+
+class ExponentialTrend : public Trend {
+ private:
+  int power;
+
+ public:
+  ExponentialTrend(TimeSeries *series, int pow) : power(pow) {
+    this->timeSeries = series;
+  }
+  ~ExponentialTrend() = default;
 
   void parameterEstimation();
   S21Matrix getX();
