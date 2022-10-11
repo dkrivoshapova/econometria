@@ -3,20 +3,12 @@ void TimeSeries::calc(std::string str) {
   string_to_vector(str);
   set_size();
   set_x();
+  set_tss();
 
   for (int i = 0; i < timeSeries.size(); i++) {
     std::cout << timeSeries[i] << " ";
   }
   std::cout << "\n\n";
-
-  // for (int i = 0; i <= t_2; i++){
-  // calcParams(i);
-  // std::vector<double> res = getCoordinates();
-  // for (int i = 0; i < res.size(); i++) {
-  //   std::cout << res[i] << " ";
-  // }
-  // std::cout << "\n\n";
-  // }
 }
 
 void TimeSeries::set_size() {
@@ -42,4 +34,21 @@ void TimeSeries::string_to_vector(std::string str) {
   for (; rit != rend; ++rit) {
     timeSeries.push_back(std::stod(rit->str()));
   }
+}
+
+void TimeSeries::set_tss() {
+  double average = calcAverage();
+  double result = 0;
+  for (int i = 1; i <= t; i++) {
+    result += pow(timeSeries[i] - average, 2);
+  }
+  tss = result;
+}
+
+double TimeSeries::calcAverage() {
+  double s = 0;
+  for (int i = 1; i <= t; i++) {
+    s += timeSeries[i];
+  }
+  return s / t;
 }
