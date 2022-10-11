@@ -5,10 +5,10 @@ void TimeSeries::calc(std::string str) {
   set_x();
   set_tss();
 
-  for (int i = 0; i < timeSeries.size(); i++) {
-    std::cout << timeSeries[i] << " ";
-  }
-  std::cout << "\n\n";
+  // for (int i = 0; i < timeSeries.size(); i++) {
+  //   std::cout << timeSeries[i] << " ";
+  // }
+  // std::cout << "\n\n";
 }
 
 void TimeSeries::set_size() {
@@ -38,10 +38,12 @@ void TimeSeries::string_to_vector(std::string str) {
 
 void TimeSeries::set_tss() {
   double average = calcAverage();
+  // std::cout << "среднее " << average << "\n";
   double result = 0;
   for (int i = 1; i <= t; i++) {
     result += pow(timeSeries[i] - average, 2);
   }
+  // std::cout << "tss " << result << "\n";
   tss = result;
 }
 
@@ -50,5 +52,6 @@ double TimeSeries::calcAverage() {
   for (int i = 1; i <= t; i++) {
     s += timeSeries[i];
   }
+  // std::cout << "сумма " << s << "\n";
   return s / t;
 }

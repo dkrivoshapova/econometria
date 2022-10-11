@@ -1,31 +1,47 @@
 #include "trend.h"
 
-void DetermineTrend::getTrend() {
+Trend* DetermineTrend::getTrend() {
   Fisher fisher;
   fisher.parseFile("parser/table.csv");
   Trend* polynomialTrend = findPowerOfTrend(&fisher, true);
+  std::cout << "\n";
   Trend* exponentialTrend = findPowerOfTrend(&fisher, false);
-  deleteTrend(polynomialTrend, exponentialTrend);
+  std::cout << polynomialTrend->r << std::endl;
+  std::cout << exponentialTrend->r << std::endl;
+  if (polynomialTrend->r > exponentialTrend->r) {
+    delete exponentialTrend;
+    return polynomialTrend;
+  } else {
+    delete polynomialTrend;
+    return exponentialTrend;
+  }
 }
 
 Trend* DetermineTrend::findPowerOfTrend(Fisher* fisher, bool check) {
   Trend* trend;
-  for (size_t i = 1; i < 6; i++) {
+  for (size_t i = 1; i < 4; i++) {
+    // std::cout << i << "\n";
     if (check) {
       trend = new PolynomialTrend(timeSeries, i);
+
     } else {
       trend = new ExponentialTrend(timeSeries, i);
     }
     trend->parameterEstimation();
+    trend->fTest(fisher);
     if (trend->fTest(fisher)) {
+      return trend;
       break;
     }
-    delete trend;
+
+    if (i != 3) {
+      delete trend;
+    };
   }
   return trend;
 }
 
-void deleteTrend(Trend* one, Trend* two) {
+void DetermineTrend::deleteTrend(Trend* one, Trend* two) {
   delete one;
   delete two;
 }
@@ -40,7 +56,7 @@ bool Trend::fTest(Fisher* fisher) {
   double k = power + 1;
   double fEstimated = (r / (k - 1)) / ((1 - r) / (timeSeries->t - k));
   double fTabular = fisher->getQuantile(k - 1, timeSeries->t - k);
-  double fTabular = 0;
+  // std::cout << fEstimated << " " << fTabular << " " << r << "\n";
   return fEstimated >= fTabular;
 }
 
@@ -60,18 +76,24 @@ void Trend::parameterEstimation() {
 
 void Trend::setR() {
   double ess = 0;
-  double tss = 0;
   for (size_t i = 0; i < timeSeries->t; i++) {
     double difference = timeSeries->timeSeries[i] - yEstimated[i];
     ess += pow(difference, 2);
   }
-  r = 1 - (ess / tss);
+  r = 1 - (ess / timeSeries->tss);
 }
 
-void Trend::setYEstimated(S21Matrix x, S21Matrix coef) {
+void PolynomialTrend::setYEstimated(S21Matrix x, S21Matrix coef) {
   S21Matrix result = x * coef;
-  for (int i = 0; i < coef.getRows(); i++) {
-    yEstimated.push_back(coef(i, 0));
+  for (int i = 0; i < result.getRows(); i++) {
+    yEstimated.push_back(result(i, 0));
+  }
+}
+
+void ExponentialTrend::setYEstimated(S21Matrix x, S21Matrix coef) {
+  S21Matrix result = x * coef;
+  for (int i = 0; i < result.getRows(); i++) {
+    yEstimated.push_back(pow(M_E, result(i, 0)));
   }
 }
 

@@ -11,27 +11,13 @@
 #include "parser/fisher.h"
 #include "timeSeries.h"
 
-class DetermineTrend {
- public:
-  TimeSeries *timeSeries;
-
-  DetermineTrend(TimeSeries *series) { this->timeSeries = series; }
-  ~DetermineTrend();
-
-  void getTrend();
-  PolynomialTrend *getPolynomialTrend();
-  Trend *findPowerOfTrend(Fisher *fisher, bool check);
-
-  void deleteTrend(Trend *one, Trend *two);
-};
-
 class Trend {
  public:
   std::vector<double> coefficients;
   TimeSeries *timeSeries;
   std::vector<double> yEstimated;
   int power;
-  int r;
+  double r;
 
   Trend() {}
   Trend(TimeSeries *series, int pow) : power(pow) { this->timeSeries = series; }
@@ -41,33 +27,51 @@ class Trend {
   bool fTest(Fisher *fisher);
 
   void parameterEstimation();
-  void setYEstimated(S21Matrix x, S21Matrix coef);
+
   void setR();
 
   S21Matrix getX();
   virtual S21Matrix getY() = 0;
+  virtual void setYEstimated(S21Matrix x, S21Matrix coef) = 0;
 };
 
 class PolynomialTrend : public Trend {
  public:
   TimeSeries *timeSeries;
   int power;
-  PolynomialTrend(TimeSeries *series, int pow) : power(pow) {
+  PolynomialTrend(TimeSeries *series, int pow)
+      : Trend(series, pow), power(pow) {
     this->timeSeries = series;
   }
   ~PolynomialTrend() = default;
 
   S21Matrix getY();
+  void setYEstimated(S21Matrix x, S21Matrix coef);
 };
 
 class ExponentialTrend : public Trend {
  public:
   TimeSeries *timeSeries;
   int power;
-  ExponentialTrend(TimeSeries *series, int pow) : power(pow) {
+  ExponentialTrend(TimeSeries *series, int pow)
+      : Trend(series, pow), power(pow) {
     this->timeSeries = series;
   }
   ~ExponentialTrend() = default;
 
   S21Matrix getY();
+  void setYEstimated(S21Matrix x, S21Matrix coef);
+};
+
+class DetermineTrend {
+ public:
+  TimeSeries *timeSeries;
+
+  DetermineTrend(TimeSeries *series) { this->timeSeries = series; }
+  ~DetermineTrend() = default;
+
+  Trend *getTrend();
+  Trend *findPowerOfTrend(Fisher *fisher, bool check);
+
+  void deleteTrend(Trend *one, Trend *two);
 };
