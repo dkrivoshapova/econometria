@@ -12,12 +12,10 @@ class TimeSeries {
   int t_2;
   double tss;
   std::vector<double> timeSeries;
-  std::vector<int> x;
+  std::vector<double> x;
 
-  void calc(std::string str);
-  void string_to_vector(std::string str);
+  void calc(std::vector<double> y, std::vector<double> x);
   void set_size();
-  void set_x();
   void set_tss();
   double calcAverage();
 };

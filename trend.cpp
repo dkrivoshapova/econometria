@@ -2,17 +2,14 @@
 
 Trend* DetermineTrend::getTrend() {
   Fisher fisher;
-  fisher.parseFile("parser/table.csv");
+  fisher.parseFile("/opt/goinfre/fjynessa/econometrickQT/table.csv");
   Trend* polynomialTrend = findPowerOfTrend(&fisher, true);
-  std::cout << "\n";
   Trend* exponentialTrend = findPowerOfTrend(&fisher, false);
-  std::cout << polynomialTrend->r << std::endl;
-  std::cout << exponentialTrend->r << std::endl;
   if (polynomialTrend->r > exponentialTrend->r) {
-    delete exponentialTrend;
+    //    delete exponentialTrend;
     return polynomialTrend;
   } else {
-    delete polynomialTrend;
+    //    delete polynomialTrend;
     return exponentialTrend;
   }
 }
@@ -23,7 +20,6 @@ Trend* DetermineTrend::findPowerOfTrend(Fisher* fisher, bool check) {
     // std::cout << i << "\n";
     if (check) {
       trend = new PolynomialTrend(timeSeries, i);
-
     } else {
       trend = new ExponentialTrend(timeSeries, i);
     }
@@ -35,7 +31,7 @@ Trend* DetermineTrend::findPowerOfTrend(Fisher* fisher, bool check) {
     }
 
     if (i != 3) {
-      delete trend;
+      //      delete trend;
     };
   }
   return trend;
@@ -77,8 +73,9 @@ void Trend::parameterEstimation() {
 void Trend::setR() {
   double ess = 0;
   for (size_t i = 0; i < timeSeries->t; i++) {
-    double difference = timeSeries->timeSeries[i] - yEstimated[i];
-    ess += pow(difference, 2);
+    double dif = timeSeries->timeSeries[i] - yEstimated[i];
+    ess += pow(dif, 2);
+    difference.push_back(dif);
   }
   r = 1 - (ess / timeSeries->tss);
 }
@@ -118,7 +115,11 @@ S21Matrix PolynomialTrend::getY() {
 S21Matrix ExponentialTrend::getY() {
   S21Matrix y(timeSeries->t, 1);
   for (int i = 0; i < y.getRows(); i++) {
-    y(i, 0) = log(timeSeries->timeSeries[i]);
+    if (timeSeries->timeSeries[i] == 0) {
+      y(i, 0) = log(0.1);
+    } else {
+      y(i, 0) = log(timeSeries->timeSeries[i]);
+    }
   }
   return y;
 }

@@ -7,8 +7,8 @@
 #include <regex>
 #include <vector>
 
+#include "fisher.h"
 #include "matrix.h"
-#include "parser/fisher.h"
 #include "timeSeries.h"
 
 class Trend {
@@ -16,6 +16,7 @@ class Trend {
   std::vector<double> coefficients;
   TimeSeries *timeSeries;
   std::vector<double> yEstimated;
+  std::vector<double> difference;
   int power;
   double r;
 

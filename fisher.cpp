@@ -50,3 +50,24 @@ double Fisher::getQuantile(int row, int col) {
   // std::cout << position << "\n";
   return fisherTable_[row][position];
 }
+
+void Parser::parseFile(std::string filename) {
+  std::string line;
+  std::ifstream in(filename);
+  if (!in.is_open()) {
+    throw std::invalid_argument("Error:" + filename + " dont exist!");
+  }
+  while (getline(in, line)) {
+    y_.push_back(std::stoi(line));
+  }
+}
+
+std::vector<double>& Parser::getY() { return y_; }
+
+std::vector<double> Parser::getX() {
+  std::vector<double> x;
+  for (int i = 1; i <= y_.size(); i++) {
+    x.push_back(i);
+  }
+  return x;
+}
