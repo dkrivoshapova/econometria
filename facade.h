@@ -11,7 +11,10 @@ class Facade {
 
   std::pair<std::vector<double>, std::vector<double>> getData(
       std::string fileName);
-  std::pair<std::vector<double>, std::vector<double>> getTrend();
+  std::pair<std::vector<double>, std::vector<double>> getPolinomialTrend(
+      int power);
+  std::pair<std::vector<double>, std::vector<double>> getExponentialTrend(
+      int power);
   std::pair<std::vector<double>, std::vector<double>> getDifference();
   std::pair<std::vector<double>, std::vector<double>> getHarmonic();
 

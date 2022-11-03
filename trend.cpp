@@ -1,40 +1,18 @@
 #include "trend.h"
 
-Trend* DetermineTrend::getTrend() {
+Trend* DetermineTrend::getPolinomialTrend(int power) {
   Fisher fisher;
-  fisher.parseFile("/opt/goinfre/fjynessa/econometrickQT/table.csv");
-  Trend* polynomialTrend = findPowerOfTrend(&fisher, true);
-  Trend* exponentialTrend = findPowerOfTrend(&fisher, false);
-  if (polynomialTrend->r > exponentialTrend->r) {
-    //    delete exponentialTrend;
-    return polynomialTrend;
-  } else {
-    //    delete polynomialTrend;
-    return exponentialTrend;
-  }
+  fisher.parseFile();
+  Trend* polynomialTrend = new PolynomialTrend(timeSeries, power);
+  return polynomialTrend;
 }
 
-Trend* DetermineTrend::findPowerOfTrend(Fisher* fisher, bool check) {
-  Trend* trend;
-  for (size_t i = 1; i < 4; i++) {
-    // std::cout << i << "\n";
-    if (check) {
-      trend = new PolynomialTrend(timeSeries, i);
-    } else {
-      trend = new ExponentialTrend(timeSeries, i);
-    }
-    trend->parameterEstimation();
-    trend->fTest(fisher);
-    if (trend->fTest(fisher)) {
-      return trend;
-      break;
-    }
+Trend* DetermineTrend::getExponentialTrend(int power) {
+  Fisher fisher;
+  fisher.parseFile();
+  Trend* exponentialTrend = new ExponentialTrend(timeSeries, power);
 
-    if (i != 3) {
-      //      delete trend;
-    };
-  }
-  return trend;
+  return exponentialTrend;
 }
 
 void DetermineTrend::deleteTrend(Trend* one, Trend* two) {

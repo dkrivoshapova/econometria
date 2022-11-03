@@ -15,13 +15,24 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" rowspan="8">
-     <widget class="QCustomPlot" name="graphWidget" native="true"/>
-    </item>
-    <item row="5" column="1">
-     <widget class="QPushButton" name="add_harmonic_btn">
+    <item row="11" column="1">
+     <widget class="QPushButton" name="delete_trend_btn">
       <property name="text">
-       <string>Добавить гармонику</string>
+       <string>Удалить тренд</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QLabel" name="set_red_lbl">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QRadioButton" name="exponencial">
+      <property name="text">
+       <string>Экспоненциальный тренд</string>
       </property>
      </widget>
     </item>
@@ -38,21 +49,7 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
-     <widget class="QPushButton" name="delete_trend_btn">
-      <property name="text">
-       <string>Удалить тренд</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="trend_btn">
-      <property name="text">
-       <string>Построить тренд</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
+    <item row="13" column="1">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -65,6 +62,67 @@
       </property>
      </spacer>
     </item>
+    <item row="7" column="1">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Уравнение тренда</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QRadioButton" name="polinomial">
+      <property name="text">
+       <string>Полиномиальный тренд</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string> Коэффициент детерминации</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QPushButton" name="add_harmonic_btn">
+      <property name="text">
+       <string>Добавить гармонику</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QLabel" name="set_eq_lbl">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QPushButton" name="trend_btn">
+      <property name="text">
+       <string>Построить тренд</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="14">
+     <widget class="QCustomPlot" name="graphWidget" native="true"/>
+    </item>
+    <item row="5" column="1">
+     <widget class="QSpinBox" name="power_box">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>10</number>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -73,7 +131,7 @@
      <x>0</x>
      <y>0</y>
      <width>1342</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

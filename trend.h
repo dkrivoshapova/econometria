@@ -71,8 +71,8 @@ class DetermineTrend {
   DetermineTrend(TimeSeries *series) { this->timeSeries = series; }
   ~DetermineTrend() = default;
 
-  Trend *getTrend();
-  Trend *findPowerOfTrend(Fisher *fisher, bool check);
+  Trend *getPolinomialTrend(int power);
+  Trend *getExponentialTrend(int power);
 
   void deleteTrend(Trend *one, Trend *two);
 };

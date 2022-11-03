@@ -19,7 +19,7 @@ class Parser {
 
 class Fisher {
  public:
-  void parseFile(std::string filename);
+  void parseFile();
   double getQuantile(int row, int col);
 
  private:

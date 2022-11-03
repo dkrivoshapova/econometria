@@ -15,7 +15,8 @@ std::vector<std::string> strip(const std::string& str, char pattern) {
   return list;
 }
 
-void Fisher::parseFile(std::string filename) {
+void Fisher::parseFile() {
+  std::string filename = "/Users/fjynessa/econometria/table.csv";
   std::string line;
   std::ifstream in(filename);
   if (!in.is_open()) {

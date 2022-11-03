@@ -14,17 +14,28 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getData(
   return {x, y};
 }
 
-std::pair<std::vector<double>, std::vector<double>> Facade::getTrend() {
+std::pair<std::vector<double>, std::vector<double>> Facade::getPolinomialTrend(
+    int power) {
   DetermineTrend trendd(timeSeries_);
-  trend_ = trendd.getTrend();
+  trend_ = trendd.getPolinomialTrend(power);
+  trend_->parameterEstimation();
+  auto vec = trend_->yEstimated;
+  return {parser_->getX(), vec};
+}
+
+std::pair<std::vector<double>, std::vector<double>> Facade::getExponentialTrend(
+    int power) {
+  DetermineTrend trendd(timeSeries_);
+  trend_ = trendd.getExponentialTrend(power);
+  trend_->parameterEstimation();
   auto vec = trend_->yEstimated;
   return {parser_->getX(), vec};
 }
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getDifference() {
   difference_->calc(trend_->difference, parser_->getX());
-  for (auto i = 0; i < timeSeries_->t;i++) {
-      harmonic.push_back(0);
+  for (auto i = 0; i < timeSeries_->t; i++) {
+    harmonic.push_back(0);
   }
   auto vec = trend_->difference;
   return {parser_->getX(), vec};
@@ -38,7 +49,7 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getHarmonic() {
 }
 
 void Facade::setHarmonicVector(std::vector<double> vec) {
-    for (int i = 0; i < harmonic.size();i++) {
-        harmonic[i] += vec[i];
-    }
+  for (int i = 0; i < harmonic.size(); i++) {
+    harmonic[i] += vec[i];
+  }
 }

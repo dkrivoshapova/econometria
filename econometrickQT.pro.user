@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.0, 2022-10-13T23:09:53. -->
+<!-- Written by QtCreator 7.0.0, 2022-11-03T19:01:20. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -241,8 +241,9 @@
      <value type="QString">DYLD_FRAMEWORK_PATH</value>
      <value type="QString">DYLD_LIBRARY_PATH</value>
     </valuelist>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/opt/goinfre/fjynessa/econometrickQT/econometrickQT.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/opt/goinfre/fjynessa/econometrickQT/econometrickQT.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">econometrickQT2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/fjynessa/econometria/econometrickQT.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/fjynessa/econometria/econometrickQT.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
