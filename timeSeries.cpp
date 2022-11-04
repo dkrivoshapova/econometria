@@ -1,6 +1,6 @@
 #include "timeSeries.h"
 
-void TimeSeries::calc(std::vector<double> y, std::vector<double> x_) {
+void TimeSeries::initTimeSeries(std::vector<double> y, std::vector<double> x_) {
   timeSeries = y;
   x = x_;
   set_size();

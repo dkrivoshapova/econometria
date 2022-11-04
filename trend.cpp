@@ -2,25 +2,6 @@
 
 #include <QDebug>
 
-// Trend* DetermineTrend::getPolinomialTrend(int power) {
-//   // Fisher fisher;
-//   Trend* polynomialTrend = new PolynomialTrend(timeSeries, power);
-//   fisher->parseFile();
-//   return polynomialTrend;
-// }
-
-// Trend* DetermineTrend::getExponentialTrend(int power) {
-//   // Fisher fisher;
-//   fisher->parseFile();
-//   Trend* exponentialTrend = new ExponentialTrend(timeSeries, power);
-//   return exponentialTrend;
-// }
-
-// void DetermineTrend::deleteTrend(Trend* one, Trend* two) {
-//   delete one;
-//   delete two;
-// }
-
 void Trend::setCoefficients(S21Matrix coef) {
   for (int i = 0; i < coef.getRows(); i++) {
     coefficients.push_back(coef(i, 0));
@@ -73,15 +54,6 @@ void ExponentialTrend::setYEstimated(S21Matrix x, S21Matrix coef) {
     yEstimated.push_back(pow(M_E, result(i, 0)));
   }
 }
-
-// std::string Trend::getEquation() {
-//   std::string equation = "";
-//   for (auto i = coefficients.size() - 1; i > 0; i--) {
-//     equation += to_string(coefficients[i]) + "t^" + to_string(i);
-//   }
-//   equation += to_string(coefficients[0]);
-//   return equation;
-// }
 
 S21Matrix Trend::getX() {
   S21Matrix x(timeSeries->t, power + 1);

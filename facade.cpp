@@ -10,7 +10,7 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getData(
   parser_->parseFile(fileName);
   auto y = parser_->getY();
   auto x = parser_->getX();
-  timeSeries_->calc(y, x);
+  timeSeries_->initTimeSeries(y, x);
   return {x, y};
 }
 
@@ -31,8 +31,8 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getExponentialTrend(
 }
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getDifference() {
-  difference_->calc(trend_->difference, parser_->getX());
-  for (auto i = 0; i < timeSeries_->t; i++) {
+  difference_->initTimeSeries(trend_->difference, parser_->getX());
+  for (auto i = 0; i < timeSeries_->t_2; i++) {
     harmonic.push_back(0);
   }
   auto vec = trend_->difference;
@@ -56,7 +56,7 @@ std::string Facade::getTrendEquation() {
   std::string result = "";
   for (int i = trend_->coefficients.size() - 1; i > 0; i--) {
     result += to_string(trend_->coefficients[i]) + "t^" + to_string(i) + " ";
-    if (trend_->coefficients[i-1] > 0) result += "+";
+    if (trend_->coefficients[i - 1] > 0) result += "+";
   }
   result += to_string(trend_->coefficients[0]);
   return result;
