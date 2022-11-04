@@ -54,7 +54,7 @@ class HarmonicAnalys {
 
   void initHarmonics() {
     harmonics.clear();
-    for (int i; i < timeSeries->t_2; i++) {
+    for (int i = 0; i < timeSeries->t_2; i++) {
       Harmonic h(timeSeries);
       h.calcParams(i);
       harmonics.push_back(h);

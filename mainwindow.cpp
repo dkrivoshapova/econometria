@@ -5,13 +5,17 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  graphWorker_ = new GraphWorker(new Facade(new Parser));
+  parser_ = new Parser();
+  facade_ = new Facade(parser_);
+  graphWorker_ = new GraphWorker(facade_);
   graphWorker_->InitGraphWorker(ui->graphWidget);
 }
 
 MainWindow::~MainWindow() {
   delete ui;
   delete graphWorker_;
+  delete parser_;
+  delete facade_;
 }
 
 void MainWindow::on_load_file_btn_clicked() {
@@ -31,6 +35,9 @@ void MainWindow::on_load_file_btn_clicked() {
 void MainWindow::on_trend_btn_clicked() {
   int power = ui->power_box->value();
   auto pair = graphWorker_->DrawTrend(ui->polinomial->isChecked(), power);
+  ui->set_eq_lbl->setText(QString::fromStdString(facade_->getTrendEquation()));
+  ui->set_fstatistic_lbl->setText(QString::fromStdString(facade_->getF()));
+  ui->set_red_lbl->setText(QString::fromStdString(facade_->getR2()));
 
   //     if (!pair.first) {
   //         s21::Assistant::ShowMessageBox(this, pair.second);

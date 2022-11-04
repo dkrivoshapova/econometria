@@ -2,9 +2,11 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <ostream>
 #include <regex>
+#include <sstream>
 #include <vector>
 
 #include "fisher.h"
@@ -15,21 +17,27 @@ class Trend {
  public:
   std::vector<double> coefficients;
   TimeSeries *timeSeries;
+  Fisher *fisher;
   std::vector<double> yEstimated;
   std::vector<double> difference;
   int power;
   double r;
 
   Trend() {}
-  Trend(TimeSeries *series, int pow) : power(pow) { this->timeSeries = series; }
-  ~Trend() = default;
+  Trend(TimeSeries *series, int pow) : power(pow) {
+    fisher = new Fisher();
+    this->timeSeries = series;
+  }
+  ~Trend() { delete fisher; }
 
   void setCoefficients(S21Matrix coefficients);
-  bool fTest(Fisher *fisher);
+  std::pair<double, double> fTest();
 
   void parameterEstimation();
 
   void setR();
+
+  // std::string getEquation();
 
   S21Matrix getX();
   virtual S21Matrix getY() = 0;
@@ -64,15 +72,15 @@ class ExponentialTrend : public Trend {
   void setYEstimated(S21Matrix x, S21Matrix coef);
 };
 
-class DetermineTrend {
- public:
-  TimeSeries *timeSeries;
+// class DetermineTrend {
+//  public:
+//   TimeSeries *timeSeries;
 
-  DetermineTrend(TimeSeries *series) { this->timeSeries = series; }
-  ~DetermineTrend() = default;
+//   DetermineTrend(TimeSeries *series) { this->timeSeries = series; }
+//   ~DetermineTrend() = default;
 
-  Trend *getPolinomialTrend(int power);
-  Trend *getExponentialTrend(int power);
+// Trend *getPolinomialTrend(int power);
+// Trend *getExponentialTrend(int power);
 
-  void deleteTrend(Trend *one, Trend *two);
-};
+//   void deleteTrend(Trend *one, Trend *two);
+// };

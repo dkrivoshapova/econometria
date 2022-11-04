@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1342</width>
-    <height>650</height>
+    <width>1158</width>
+    <height>653</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,98 +15,24 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="11" column="1">
-     <widget class="QPushButton" name="delete_trend_btn">
-      <property name="text">
-       <string>Удалить тренд</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="1">
-     <widget class="QLabel" name="set_red_lbl">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QRadioButton" name="exponencial">
-      <property name="text">
-       <string>Экспоненциальный тренд</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="load_file_btn">
-      <property name="maximumSize">
-       <size>
-        <width>250</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Импортировать ряд из файла</string>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="1">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="7" column="1">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Уравнение тренда</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QRadioButton" name="polinomial">
-      <property name="text">
-       <string>Полиномиальный тренд</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="1">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string> Коэффициент детерминации</string>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="1">
-     <widget class="QPushButton" name="add_harmonic_btn">
-      <property name="text">
-       <string>Добавить гармонику</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1">
-     <widget class="QLabel" name="set_eq_lbl">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QPushButton" name="trend_btn">
-      <property name="text">
-       <string>Построить тренд</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" rowspan="14">
-     <widget class="QCustomPlot" name="graphWidget" native="true"/>
-    </item>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMinimumSize</enum>
+    </property>
+    <property name="leftMargin">
+     <number>12</number>
+    </property>
+    <property name="topMargin">
+     <number>12</number>
+    </property>
+    <property name="rightMargin">
+     <number>12</number>
+    </property>
+    <property name="bottomMargin">
+     <number>12</number>
+    </property>
+    <property name="spacing">
+     <number>-1</number>
+    </property>
     <item row="5" column="1">
      <widget class="QSpinBox" name="power_box">
       <property name="sizePolicy">
@@ -123,19 +49,117 @@
       </property>
      </widget>
     </item>
+    <item row="3" column="1">
+     <widget class="QRadioButton" name="exponencial">
+      <property name="text">
+       <string>Экспоненциальный тренд</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QLabel" name="set_fstatistic_lbl">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QPushButton" name="trend_btn">
+      <property name="text">
+       <string>Построить тренд</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLabel" name="red_lbl">
+      <property name="text">
+       <string> Коэффициент детерминации:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLabel" name="eq_lbl">
+      <property name="text">
+       <string>Уравнение тренда:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="17">
+     <widget class="QCustomPlot" name="graphWidget" native="true"/>
+    </item>
+    <item row="13" column="1">
+     <widget class="QPushButton" name="delete_trend_btn">
+      <property name="text">
+       <string>Удалить тренд</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QLabel" name="set_red_lbl">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QLabel" name="fstatistic_lbl">
+      <property name="text">
+       <string>F статистика:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="1">
+     <widget class="QPushButton" name="add_harmonic_btn">
+      <property name="text">
+       <string>Добавить гармонику</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QRadioButton" name="polinomial">
+      <property name="text">
+       <string>Полиномиальный тренд</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="load_file_btn">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Импортировать ряд из файла</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QLabel" name="set_eq_lbl">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="1" rowspan="2">
+     <widget class="QCustomPlot" name="diagramWidget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>200</height>
+       </size>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1342</width>
-     <height>24</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
   <customwidget>

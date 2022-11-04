@@ -16,8 +16,7 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getData(
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getPolinomialTrend(
     int power) {
-  DetermineTrend trendd(timeSeries_);
-  trend_ = trendd.getPolinomialTrend(power);
+  trend_ = new PolynomialTrend(timeSeries_, power);
   trend_->parameterEstimation();
   auto vec = trend_->yEstimated;
   return {parser_->getX(), vec};
@@ -25,8 +24,7 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getPolinomialTrend(
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getExponentialTrend(
     int power) {
-  DetermineTrend trendd(timeSeries_);
-  trend_ = trendd.getExponentialTrend(power);
+  trend_ = new ExponentialTrend(timeSeries_, power);
   trend_->parameterEstimation();
   auto vec = trend_->yEstimated;
   return {parser_->getX(), vec};
@@ -52,4 +50,45 @@ void Facade::setHarmonicVector(std::vector<double> vec) {
   for (int i = 0; i < harmonic.size(); i++) {
     harmonic[i] += vec[i];
   }
+}
+
+std::string Facade::getTrendEquation() {
+  std::string result = "";
+  for (int i = trend_->coefficients.size() - 1; i > 0; i--) {
+    result += to_string(trend_->coefficients[i]) + "t^" + to_string(i) + " ";
+    if (trend_->coefficients[i-1] > 0) result += "+";
+  }
+  result += to_string(trend_->coefficients[0]);
+  return result;
+}
+
+std::string Facade::getF() {
+  std::string result = "";
+  std::pair<double, double> f = trend_->fTest();
+  if (f.first > f.second) {
+    result =
+        to_string(f.first) + " > " + to_string(f.second) + " регрессия значима";
+  } else {
+    result = to_string(f.first) + " <= " + to_string(f.second) +
+             "регрессия не значима";
+  }
+  return result;
+}
+
+std::string Facade::getR2() { return to_string(trend_->r); }
+
+std::string to_string(double number) {
+  std::string result;
+  std::stringstream ss;
+  ss << result << std::fixed << std::setprecision(2) << number;
+  result = ss.str();
+  return result;
+}
+
+std::string to_string(int number) {
+  std::string result;
+  std::stringstream ss;
+  ss << result << std::fixed << std::setprecision(0) << number;
+  result = ss.str();
+  return result;
 }

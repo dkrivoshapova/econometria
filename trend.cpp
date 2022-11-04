@@ -1,24 +1,25 @@
 #include "trend.h"
 
-Trend* DetermineTrend::getPolinomialTrend(int power) {
-  Fisher fisher;
-  fisher.parseFile();
-  Trend* polynomialTrend = new PolynomialTrend(timeSeries, power);
-  return polynomialTrend;
-}
+#include <QDebug>
 
-Trend* DetermineTrend::getExponentialTrend(int power) {
-  Fisher fisher;
-  fisher.parseFile();
-  Trend* exponentialTrend = new ExponentialTrend(timeSeries, power);
+// Trend* DetermineTrend::getPolinomialTrend(int power) {
+//   // Fisher fisher;
+//   Trend* polynomialTrend = new PolynomialTrend(timeSeries, power);
+//   fisher->parseFile();
+//   return polynomialTrend;
+// }
 
-  return exponentialTrend;
-}
+// Trend* DetermineTrend::getExponentialTrend(int power) {
+//   // Fisher fisher;
+//   fisher->parseFile();
+//   Trend* exponentialTrend = new ExponentialTrend(timeSeries, power);
+//   return exponentialTrend;
+// }
 
-void DetermineTrend::deleteTrend(Trend* one, Trend* two) {
-  delete one;
-  delete two;
-}
+// void DetermineTrend::deleteTrend(Trend* one, Trend* two) {
+//   delete one;
+//   delete two;
+// }
 
 void Trend::setCoefficients(S21Matrix coef) {
   for (int i = 0; i < coef.getRows(); i++) {
@@ -26,12 +27,13 @@ void Trend::setCoefficients(S21Matrix coef) {
   }
 }
 
-bool Trend::fTest(Fisher* fisher) {
+std::pair<double, double> Trend::fTest() {
   double k = power + 1;
   double fEstimated = (r / (k - 1)) / ((1 - r) / (timeSeries->t - k));
+  fisher->parseFile();
   double fTabular = fisher->getQuantile(k - 1, timeSeries->t - k);
   // std::cout << fEstimated << " " << fTabular << " " << r << "\n";
-  return fEstimated >= fTabular;
+  return {fEstimated, fTabular};
 }
 
 void Trend::parameterEstimation() {
@@ -71,6 +73,15 @@ void ExponentialTrend::setYEstimated(S21Matrix x, S21Matrix coef) {
     yEstimated.push_back(pow(M_E, result(i, 0)));
   }
 }
+
+// std::string Trend::getEquation() {
+//   std::string equation = "";
+//   for (auto i = coefficients.size() - 1; i > 0; i--) {
+//     equation += to_string(coefficients[i]) + "t^" + to_string(i);
+//   }
+//   equation += to_string(coefficients[0]);
+//   return equation;
+// }
 
 S21Matrix Trend::getX() {
   S21Matrix x(timeSeries->t, power + 1);

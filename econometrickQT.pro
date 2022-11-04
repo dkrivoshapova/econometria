@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     facade.cpp \
     fisher.cpp \
+    gistogramworker.cpp \
     graphworker.cpp \
     harmonic.cpp \
     main.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 HEADERS += \
     facade.h \
     fisher.h \
+    gistogramworker.h \
     graphworker.h \
     harmonic.h \
     mainwindow.h \
