@@ -8,7 +8,11 @@
 class Facade {
  public:
   Facade(Parser *parser);
-  ~Facade() { delete trend_; };
+  ~Facade() {
+//      if (trend_ != nullptr) delete trend_;
+//      if (timeSeries_ != nullptr) delete timeSeries_;
+//      if (difference_ != nullptr) delete difference_;
+  };
 
   std::pair<std::vector<double>, std::vector<double>> getData(
       std::string fileName);

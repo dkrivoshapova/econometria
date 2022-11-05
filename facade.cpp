@@ -1,5 +1,7 @@
 #include "facade.h"
 
+#include <QDebug>>
+
 Facade::Facade(Parser *parser) : parser_(parser) {
   timeSeries_ = new TimeSeries();
   difference_ = new TimeSeries();
@@ -32,7 +34,7 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getExponentialTrend(
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getDifference() {
   difference_->initTimeSeries(trend_->difference, parser_->getX());
-  for (auto i = 0; i < timeSeries_->t_2; i++) {
+  for (auto i = 0; i < timeSeries_->t; i++) {
     harmonic.push_back(0);
   }
   auto vec = trend_->difference;
@@ -42,12 +44,15 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getDifference() {
 std::pair<std::vector<double>, std::vector<double>> Facade::getHarmonic() {
   HarmonicAnalys harmonicAnalys_(difference_);
   std::vector<double> hbe = harmonicAnalys_.getYBest();
+  qDebug() << hbe << '\n';
   setHarmonicVector(hbe);
+  qDebug() << parser_->getX() << '\n';
+  qDebug() << harmonic << '\n';
   return {parser_->getX(), harmonic};
 }
 
 void Facade::setHarmonicVector(std::vector<double> vec) {
-  for (int i = 0; i < harmonic.size(); i++) {
+  for (int i = 0; i < vec.size(); i++) {
     harmonic[i] += vec[i];
   }
 }

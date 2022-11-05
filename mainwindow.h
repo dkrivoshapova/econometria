@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "graphworker.h"
+#include "gistogramworker.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,6 +31,7 @@ class MainWindow : public QMainWindow {
  private:
   Ui::MainWindow *ui;
   GraphWorker *graphWorker_;
+  GistogramWorker *gistogramWorker_;
   Parser *parser_;
   Facade *facade_;
 };

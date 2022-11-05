@@ -1,11 +1,18 @@
 #ifndef GISTOGRAMWORKER_H
 #define GISTOGRAMWORKER_H
 
+#include "facade.h"
+#include "qcustomplot.h"
 
-class gistogramworker
+class GistogramWorker
 {
 public:
-    gistogramworker();
+    GistogramWorker(Facade *facade);
+    void InitGistogramWorker(QCustomPlot *qcustomplot);
+    void SetBaseSettingPlots();
+private:
+ Facade *facade_;
+ QCustomPlot *qcustomplot_;
 };
 
 #endif // GISTOGRAMWORKER_H

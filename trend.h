@@ -28,7 +28,7 @@ class Trend {
     fisher = new Fisher();
     this->timeSeries = series;
   }
-  ~Trend() { delete fisher; }
+  virtual ~Trend() { delete fisher; }
 
   void setCoefficients(S21Matrix coefficients);
   std::pair<double, double> fTest();

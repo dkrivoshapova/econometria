@@ -9,13 +9,16 @@ MainWindow::MainWindow(QWidget *parent)
   facade_ = new Facade(parser_);
   graphWorker_ = new GraphWorker(facade_);
   graphWorker_->InitGraphWorker(ui->graphWidget);
+  gistogramWorker_ = new GistogramWorker(facade_);
+  gistogramWorker_->InitGistogramWorker(ui->diagramWidget);
+
 }
 
 MainWindow::~MainWindow() {
   delete ui;
   delete graphWorker_;
   delete parser_;
-  delete facade_;
+//  delete facade_;
 }
 
 void MainWindow::on_load_file_btn_clicked() {
