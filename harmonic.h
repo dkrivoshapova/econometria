@@ -1,11 +1,11 @@
 #pragma once
 
+#include <QDebug>
 #include <cmath>
 #include <iostream>
 #include <ostream>
 #include <regex>
 #include <vector>
-#include <QDebug>
 
 #include "timeSeries.h"
 
@@ -16,6 +16,7 @@ class Harmonic {
   double R;
   double W;
   double O;
+  int chastota;
   TimeSeries *timeSeries;
   Harmonic(TimeSeries *series) : timeSeries(series) {}
 
@@ -42,7 +43,7 @@ class HarmonicAnalys {
         best = i;
       }
     }
-//    qDebug() << "bef getYBest TimeSeries" << timeSeries->timeSeries;
+
     replaceY(best);
     qDebug() << "удалили гармонику TimeSeries" << timeSeries->timeSeries;
     return best.getCoordinates();

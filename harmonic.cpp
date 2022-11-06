@@ -2,7 +2,7 @@
 
 double Harmonic::calcAlpha(int j) {
   double sum = 0;
-  if (j == timeSeries->t_2) {
+  if (j == timeSeries->t_2 && timeSeries->t % 2 == 0) {
     for (int i = 0; i < timeSeries->t; i++) {
       sum += pow(-1, i + 1) * timeSeries->timeSeries[i];
     }
@@ -14,7 +14,7 @@ double Harmonic::calcAlpha(int j) {
     }
     return sum / timeSeries->t;
   }
-  if (j < timeSeries->t_2) {
+  if (j <= timeSeries->t_2) {
     for (int i = 0; i < timeSeries->t; i++) {
       sum += timeSeries->timeSeries[i] *
              cos(2 * M_PI * j * (i + 1) / timeSeries->t);
@@ -39,29 +39,22 @@ double Harmonic::calcBetta(int j) {
 }
 
 void Harmonic::calcParams(int j) {
-//  qDebug() << "alpha bef" << Alpha;
-//  qDebug() << "Betta bef" << Betta;
-//  qDebug() << "R bef" << R;
+  chastota = j;
   if (j <= timeSeries->t_2) {
     Alpha = calcAlpha(j);
     Betta = calcBetta(j);
-    qDebug() << "timeSeries->t" << timeSeries->t << j;
     R = pow(pow(Alpha, 2) + pow(Betta, 2), 0.5);
     W = 2 * M_PI * j / timeSeries->t;
     O = tan(Betta / Alpha);
-    qDebug() << W << O;
   }
-  qDebug() << "alpha aft" << Alpha;
-  qDebug() << "Betta aft" << Betta;
-//  qDebug() << "R aft" << R;
 }
 
 std::vector<double> Harmonic::getCoordinates() {
   std::vector<double> result;
   for (int i = 1; i <= timeSeries->t; i++) {
-      qDebug() << R << W << i << O;
-    result.push_back(R * cos(W * i - O));
+    result.push_back(Alpha * cos(2 * M_PI * i * chastota / timeSeries->t) +
+                     Betta * sin(2 * M_PI * i * chastota / timeSeries->t));
   }
-  qDebug() << "result" << result;
+  qDebug() << "coordinates of harmonic" << result;
   return result;
 }

@@ -42,12 +42,12 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getDifference() {
 }
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getHarmonic() {
-  qDebug() << "differanse getHarmonic" << difference_->timeSeries;
+  qDebug() << "differanse" << difference_->timeSeries;
   HarmonicAnalys harmonicAnalys_(difference_);
   std::vector<double> hbe = harmonicAnalys_.getYBest();
-  qDebug() << "hbe getHarmonic" << hbe;
+  qDebug() << "hbe " << hbe;
   setHarmonicVector(hbe);
-  qDebug() << "harmonic getHarmonic" << harmonic;
+  qDebug() << "harmonic " << harmonic;
   return {parser_->getX(), harmonic};
 }
 

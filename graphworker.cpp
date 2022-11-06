@@ -64,7 +64,11 @@ void GraphWorker::DeleteTrend() {
 }
 
 void GraphWorker::AddHarmonic() {
-  counterGraphs_ += 1;
+  if (counterGraphs_ != 0) {
+      qcustomplot_->removeGraph(counterGraphs_);
+  } else {
+      counterGraphs_++;
+  }
   SetPen();
   auto pair = facade_->getHarmonic();
   auto pairQ = VectorToPairQVector(pair.first, pair.second);
