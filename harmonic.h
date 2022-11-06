@@ -5,6 +5,7 @@
 #include <ostream>
 #include <regex>
 #include <vector>
+#include <QDebug>
 
 #include "timeSeries.h"
 
@@ -41,7 +42,9 @@ class HarmonicAnalys {
         best = i;
       }
     }
+//    qDebug() << "bef getYBest TimeSeries" << timeSeries->timeSeries;
     replaceY(best);
+    qDebug() << "удалили гармонику TimeSeries" << timeSeries->timeSeries;
     return best.getCoordinates();
   }
 
@@ -54,7 +57,7 @@ class HarmonicAnalys {
 
   void initHarmonics() {
     harmonics.clear();
-    for (int i = 0; i < timeSeries->t_2; i++) {
+    for (int i = 0; i <= timeSeries->t_2; i++) {
       Harmonic h(timeSeries);
       h.calcParams(i);
       harmonics.push_back(h);

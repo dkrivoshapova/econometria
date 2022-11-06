@@ -39,19 +39,29 @@ double Harmonic::calcBetta(int j) {
 }
 
 void Harmonic::calcParams(int j) {
+//  qDebug() << "alpha bef" << Alpha;
+//  qDebug() << "Betta bef" << Betta;
+//  qDebug() << "R bef" << R;
   if (j <= timeSeries->t_2) {
     Alpha = calcAlpha(j);
     Betta = calcBetta(j);
+    qDebug() << "timeSeries->t" << timeSeries->t << j;
     R = pow(pow(Alpha, 2) + pow(Betta, 2), 0.5);
     W = 2 * M_PI * j / timeSeries->t;
     O = tan(Betta / Alpha);
+    qDebug() << W << O;
   }
+  qDebug() << "alpha aft" << Alpha;
+  qDebug() << "Betta aft" << Betta;
+//  qDebug() << "R aft" << R;
 }
 
 std::vector<double> Harmonic::getCoordinates() {
   std::vector<double> result;
   for (int i = 1; i <= timeSeries->t; i++) {
+      qDebug() << R << W << i << O;
     result.push_back(R * cos(W * i - O));
   }
+  qDebug() << "result" << result;
   return result;
 }

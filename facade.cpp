@@ -1,6 +1,6 @@
 #include "facade.h"
 
-#include <QDebug>>
+#include <QDebug>
 
 Facade::Facade(Parser *parser) : parser_(parser) {
   timeSeries_ = new TimeSeries();
@@ -42,12 +42,12 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getDifference() {
 }
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getHarmonic() {
+  qDebug() << "differanse getHarmonic" << difference_->timeSeries;
   HarmonicAnalys harmonicAnalys_(difference_);
   std::vector<double> hbe = harmonicAnalys_.getYBest();
-  qDebug() << hbe << '\n';
+  qDebug() << "hbe getHarmonic" << hbe;
   setHarmonicVector(hbe);
-  qDebug() << parser_->getX() << '\n';
-  qDebug() << harmonic << '\n';
+  qDebug() << "harmonic getHarmonic" << harmonic;
   return {parser_->getX(), harmonic};
 }
 

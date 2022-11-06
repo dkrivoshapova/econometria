@@ -67,12 +67,6 @@ void GraphWorker::AddHarmonic() {
   counterGraphs_ += 1;
   SetPen();
   auto pair = facade_->getHarmonic();
-  for (auto &i : pair.first) {
-    qDebug() << i << "\n";
-  }
-  for (auto &i : pair.second) {
-    qDebug() << i << "\n";
-  }
   auto pairQ = VectorToPairQVector(pair.first, pair.second);
   qcustomplot_->graph(counterGraphs_)->addData(pairQ.first, pairQ.second);
   qcustomplot_->replot();
