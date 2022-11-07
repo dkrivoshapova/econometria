@@ -8,10 +8,10 @@
 class Facade {
  public:
   Facade(Parser *parser);
-  ~Facade() {
-//      if (trend_ != nullptr) delete trend_;
-//      if (timeSeries_ != nullptr) delete timeSeries_;
-//      if (difference_ != nullptr) delete difference_;
+  ~Facade(){
+      //      if (trend_ != nullptr) delete trend_;
+      //      if (timeSeries_ != nullptr) delete timeSeries_;
+      //      if (difference_ != nullptr) delete difference_;
   };
 
   std::pair<std::vector<double>, std::vector<double>> getData(
@@ -25,12 +25,14 @@ class Facade {
   std::string getTrendEquation();
   std::string getF();
   std::string getR2();
+  std::pair<std::vector<double>, std::vector<double>> getPeriodogram();
 
  private:
   Parser *parser_;
   TimeSeries *timeSeries_;
   TimeSeries *difference_;
   Trend *trend_;
+  HarmonicAnalys *harmonicAnalys_;
   std::vector<double> harmonic;
 
   void setHarmonicVector(std::vector<double> vec);

@@ -43,12 +43,21 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getDifference() {
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getHarmonic() {
   qDebug() << "differanse" << difference_->timeSeries;
-  HarmonicAnalys harmonicAnalys_(difference_);
-  std::vector<double> hbe = harmonicAnalys_.getYBest();
+  // HarmonicAnalys harmonicAnalys_(difference_);
+  harmonicAnalys_ = new HarmonicAnalys(difference_);
+  std::vector<double> hbe = harmonicAnalys_->getYBest();
   qDebug() << "hbe " << hbe;
   setHarmonicVector(hbe);
   qDebug() << "harmonic " << harmonic;
   return {parser_->getX(), harmonic};
+}
+
+std::pair<std::vector<double>, std::vector<double>> Facade::getPeriodogram() {
+  std::vector<double> res;
+  for (auto i = 0; i <= timeSeries_->t_2; i++) {
+    res.push_back(i);
+  }
+  return {res, harmonicAnalys_->periodogramCoordinates()};
 }
 
 void Facade::setHarmonicVector(std::vector<double> vec) {

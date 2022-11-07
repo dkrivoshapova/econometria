@@ -34,5 +34,7 @@ class MainWindow : public QMainWindow {
   GistogramWorker *gistogramWorker_;
   Parser *parser_;
   Facade *facade_;
+
+  void test();
 };
 #endif  // MAINWINDOW_H

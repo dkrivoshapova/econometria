@@ -64,4 +64,12 @@ class HarmonicAnalys {
       harmonics.push_back(h);
     }
   }
+
+  std::vector<double> periodogramCoordinates() {
+    std::vector<double> result;
+    for (auto &i : harmonics) {
+      result.push_back(i.R);
+    }
+    return result;
+  }
 };

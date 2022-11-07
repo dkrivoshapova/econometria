@@ -11,14 +11,14 @@ MainWindow::MainWindow(QWidget *parent)
   graphWorker_->InitGraphWorker(ui->graphWidget);
   gistogramWorker_ = new GistogramWorker(facade_);
   gistogramWorker_->InitGistogramWorker(ui->diagramWidget);
-
 }
 
 MainWindow::~MainWindow() {
   delete ui;
   delete graphWorker_;
   delete parser_;
-//  delete facade_;
+  delete gistogramWorker_;
+  //  delete facade_;
 }
 
 void MainWindow::on_load_file_btn_clicked() {
@@ -47,6 +47,12 @@ void MainWindow::on_trend_btn_clicked() {
   //     }
 }
 
-void MainWindow::on_delete_trend_btn_clicked() { graphWorker_->DeleteTrend(); }
+void MainWindow::on_delete_trend_btn_clicked() {
+    graphWorker_->DeleteTrend();
+}
 
-void MainWindow::on_add_harmonic_btn_clicked() { graphWorker_->AddHarmonic(); }
+void MainWindow::on_add_harmonic_btn_clicked() {
+    graphWorker_->AddHarmonic();
+    gistogramWorker_->AddHarmonic();
+}
+
