@@ -30,6 +30,7 @@ void GraphWorker::DrawExportFile(QString filename) {
   auto pair = facade_->getData(filename.toStdString());
   auto pairQ = VectorToPairQVector(pair.first, pair.second);
   qcustomplot_->graph(0)->addData(pairQ.first, pairQ.second);
+  qcustomplot_->rescaleAxes();
   qcustomplot_->replot();
 }
 
@@ -48,6 +49,7 @@ QPair<bool, QString> GraphWorker::DrawTrend(bool type, int power) {
   }
   auto pairQ = VectorToPairQVector(pair.first, pair.second);
   qcustomplot_->graph(counterGraphs_)->addData(pairQ.first, pairQ.second);
+  qcustomplot_->rescaleAxes();
   qcustomplot_->replot();
   return {true, ""};
 }
@@ -60,6 +62,7 @@ void GraphWorker::DeleteTrend() {
   auto pair = facade_->getDifference();
   auto pairQ = VectorToPairQVector(pair.first, pair.second);
   qcustomplot_->graph(counterGraphs_)->addData(pairQ.first, pairQ.second);
+  qcustomplot_->rescaleAxes();
   qcustomplot_->replot();
 }
 
@@ -73,6 +76,7 @@ void GraphWorker::AddHarmonic() {
   auto pair = facade_->getHarmonic();
   auto pairQ = VectorToPairQVector(pair.first, pair.second);
   qcustomplot_->graph(counterGraphs_)->addData(pairQ.first, pairQ.second);
+  qcustomplot_->rescaleAxes();
   qcustomplot_->replot();
 }
 

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 
 #include "graphworker.h"
 #include "gistogramworker.h"
@@ -28,13 +29,17 @@ class MainWindow : public QMainWindow {
 
   void on_add_harmonic_btn_clicked();
 
- private:
+  void on_addAllbtn_clicked();
+
+  void ex_code();
+
+private:
   Ui::MainWindow *ui;
   GraphWorker *graphWorker_;
   GistogramWorker *gistogramWorker_;
   Parser *parser_;
   Facade *facade_;
-
-  void test();
+  int cnt_;
+  void showMessageBox(QWidget *parent, QString message);
 };
 #endif  // MAINWINDOW_H

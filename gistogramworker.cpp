@@ -1,6 +1,5 @@
 #include "gistogramworker.h"
 
-#include <QDebug>
 GistogramWorker::GistogramWorker(Facade *facade) : facade_(facade) {}
 
 void GistogramWorker::InitGistogramWorker(QCustomPlot *qcustomplot) {

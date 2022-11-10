@@ -12,6 +12,9 @@ class Parser {
   void parseFile(std::string filename);
   std::vector<double>& getY();
   std::vector<double> getX();
+  void clear() {
+      y_.clear();
+  }
 
  private:
   std::vector<double> y_;

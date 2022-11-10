@@ -1,7 +1,5 @@
 #include "facade.h"
 
-#include <QDebug>
-
 Facade::Facade(Parser *parser) : parser_(parser) {
   timeSeries_ = new TimeSeries();
   difference_ = new TimeSeries();
@@ -9,6 +7,7 @@ Facade::Facade(Parser *parser) : parser_(parser) {
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getData(
     std::string fileName) {
+  clear();
   parser_->parseFile(fileName);
   auto y = parser_->getY();
   auto x = parser_->getX();
@@ -42,13 +41,9 @@ std::pair<std::vector<double>, std::vector<double>> Facade::getDifference() {
 }
 
 std::pair<std::vector<double>, std::vector<double>> Facade::getHarmonic() {
-  qDebug() << "differanse" << difference_->timeSeries;
-  // HarmonicAnalys harmonicAnalys_(difference_);
   harmonicAnalys_ = new HarmonicAnalys(difference_);
   std::vector<double> hbe = harmonicAnalys_->getYBest();
-  qDebug() << "hbe " << hbe;
   setHarmonicVector(hbe);
-  qDebug() << "harmonic " << harmonic;
   return {parser_->getX(), harmonic};
 }
 
@@ -105,4 +100,15 @@ std::string to_string(int number) {
   ss << result << std::fixed << std::setprecision(0) << number;
   result = ss.str();
   return result;
+}
+
+int Facade::getHarmonicCount() {
+    return timeSeries_->t_2;
+}
+
+void Facade::clear() {
+    parser_->clear();
+    harmonic.clear();
+    timeSeries_->timeSeries.clear();
+    timeSeries_->x.clear();
 }

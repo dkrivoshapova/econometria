@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QDebug>
 #include <cmath>
 #include <iostream>
 #include <ostream>
@@ -45,7 +44,6 @@ class HarmonicAnalys {
     }
 
     replaceY(best);
-    qDebug() << "удалили гармонику TimeSeries" << timeSeries->timeSeries;
     return best.getCoordinates();
   }
 

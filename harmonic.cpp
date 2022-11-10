@@ -55,6 +55,5 @@ std::vector<double> Harmonic::getCoordinates() {
     result.push_back(Alpha * cos(2 * M_PI * i * chastota / timeSeries->t) +
                      Betta * sin(2 * M_PI * i * chastota / timeSeries->t));
   }
-  qDebug() << "coordinates of harmonic" << result;
   return result;
 }
