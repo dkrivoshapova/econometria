@@ -55,7 +55,7 @@ void MainWindow::on_add_harmonic_btn_clicked() {
 
 
 void MainWindow::on_addAllbtn_clicked() {
-    QTimer::singleShot(300, this, SLOT(ex_code()));
+    QTimer::singleShot(200, this, SLOT(ex_code()));
 }
 
 void MainWindow::ex_code() {
@@ -64,7 +64,7 @@ void MainWindow::ex_code() {
         return;
     }
     cnt_++;
-    QTimer::singleShot(300, this, SLOT(ex_code()));
+    QTimer::singleShot(200, this, SLOT(ex_code()));
 }
 
 void MainWindow::showMessageBox(QWidget *parent, QString message) {
